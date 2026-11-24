@@ -1,0 +1,126 @@
+/* ───────── App shell: barra superior + vista que ocupa el resto de la pantalla ───────── */
+body{display:flex;flex-direction:column;min-height:100%}
+main{flex:1;min-height:0;display:flex;flex-direction:column}
+
+/* ───────── Barra de navegación ───────── */
+.nav{position:sticky;top:0;z-index:10;height:60px;flex:none;display:flex;align-items:center;gap:20px;
+  padding:0 20px;background:color-mix(in srgb,var(--panel) 80%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;color:var(--text);text-decoration:none}
+.logo{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;color:#fff;
+  font:italic 700 15px Georgia,serif;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.tabs{position:relative;display:flex;gap:4px;margin-left:auto;padding:4px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:12px}
+.tabs a{position:relative;z-index:1;padding:6px 16px;border-radius:9px;color:var(--muted);
+  text-decoration:none;font-weight:600;font-size:.9rem;transition:color .25s}
+.tabs a.active{color:var(--on-accent)}
+.tabs .ind{position:absolute;z-index:0;top:4px;bottom:4px;left:0;width:0;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 70%,var(--accent-2)));
+  box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 45%,transparent);
+  transition:transform .35s cubic-bezier(.3,.8,.3,1), width .35s cubic-bezier(.3,.8,.3,1)}
+.icon-btn{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;cursor:pointer;
+  background:var(--panel-2);color:var(--text);border:1px solid var(--line)}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+:root[data-theme="light"] .i-sun, :root[data-theme="dark"] .i-moon{display:none}
+
+.warning{margin:12px 20px 0;background:var(--accent-soft);border-radius:10px;padding:10px 14px;font-size:.9rem}
+
+/* ───────── Ventanas ───────── */
+.view{flex:1;min-height:0;padding:16px 20px 20px;display:grid;gap:16px}
+.win{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--panel);
+  border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;
+  transition:background-color .35s,border-color .35s}
+.win.grow{flex:1}
+.win-bar{flex:none;display:flex;align-items:center;gap:7px;height:42px;padding:0 14px;
+  background:var(--panel-2);border-bottom:1px solid var(--line)}
+.win-bar i{width:11px;height:11px;border-radius:50%;background:#ff6159;opacity:.85}
+.win-bar i:nth-child(2){background:#ffbd2e}
+.win-bar i:nth-child(3){background:#28c940;margin-right:8px}
+.win-title{font-weight:650;font-size:.86rem;color:var(--muted);letter-spacing:.01em}
+.win-body{padding:18px}
+.win-body.scroll{flex:1;min-height:0;overflow:auto}
+.kbd-hint{margin-left:auto;font-size:.76rem;color:var(--muted)}
+
+/* ───────── Vista Resolver ───────── */
+.view-solve{grid-template-columns:minmax(380px,450px) 1fr}
+.view-solve .col{display:flex;flex-direction:column;gap:16px;min-height:0}
+.view-solve .win-body.math{padding:22px 26px}
+
+.hint{margin:0 0 12px;color:var(--muted);font-size:.88rem}
+.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;
+  font:italic 1.2rem Georgia,"Times New Roman",serif}
+.eq .op{font-style:normal;color:var(--muted)}
+input[type=number]{font:inherit;color:var(--text);background:var(--panel-2);border:1px solid var(--line);
+  border-radius:9px;transition:border-color .2s, box-shadow .2s, background-color .35s}
+input[type=number]:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.eq input{width:62px;font:normal 1.05rem system-ui,sans-serif;text-align:center;padding:9px 4px}
+#error{min-height:1.3em;margin:12px 0 4px;text-align:center;color:var(--err);font-size:.88rem}
+
+button{font:inherit;cursor:pointer}
+button.primary{display:block;width:100%;padding:11px;font-weight:650;color:var(--on-accent);border:0;border-radius:11px;
+  background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 65%,var(--accent-2)));
+  box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 35%,transparent)}
+button.primary:hover{filter:brightness(1.08)}
+
+/* Pasos */
+.math{font:1.08rem/1.85 Georgia,"Times New Roman",serif}
+.step{padding:12px 0;border-top:1px dashed var(--line)}
+.step:first-child{padding-top:0;border-top:0}
+.step h2{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:700 .7rem system-ui,sans-serif;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.why{margin-left:auto;font:600 .72rem system-ui,sans-serif;text-transform:none;letter-spacing:0;
+  color:var(--accent);text-decoration:none;padding:1px 8px;border-radius:99px;background:var(--accent-soft)}
+.why:hover{text-decoration:underline}
+.tag{display:inline-block;font:650 .76rem system-ui,sans-serif;background:var(--accent-soft);
+  color:var(--accent);padding:2px 11px;border-radius:99px;margin-bottom:2px}
+.final{margin-top:4px;padding:10px 14px;border-radius:11px;background:var(--accent-soft);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+
+/* ───────── Vista ¿Cómo funciona? ───────── */
+.view-how{grid-template-columns:290px 1fr}
+.topics{display:flex;flex-direction:column;gap:6px;padding:12px}
+.topic{display:flex;align-items:center;gap:11px;text-align:left;padding:10px 12px;border-radius:11px;
+  background:transparent;border:1px solid transparent;color:var(--text);font-size:.9rem;
+  transition:background-color .2s, border-color .2s, transform .2s}
+.topic:hover{background:var(--panel-2);transform:translateX(3px)}
+.topic .n{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;
+  background:var(--panel-2);color:var(--muted);font-weight:700;font-size:.78rem;transition:all .25s}
+.topic.active{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+.topic.active .n{background:var(--accent);color:var(--on-accent)}
+
+.detail{flex:1;min-height:0;display:flex;flex-direction:column}
+.detail-head{flex:none;padding:16px 20px 0}
+.detail-head small{color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+.detail-head h3{margin:2px 0 0;font-size:1.2rem;letter-spacing:-.01em}
+.detail-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 20px}
+.how-theory,.how-code{min-height:0;overflow:auto}
+.how-theory p{margin:0 0 10px}
+.how-live{margin-top:12px;padding:10px 14px;border-radius:11px;font:1rem Georgia,serif;
+  background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.how-live b{font:700 .72rem system-ui,sans-serif;display:block;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:2px}
+.how-code{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--code-bg);overflow:hidden}
+.how-code .file{flex:none;padding:7px 12px;font:.74rem ui-monospace,Menlo,monospace;color:var(--muted);
+  border-bottom:1px solid var(--line)}
+.how-code pre{flex:1;margin:0;padding:12px;overflow:auto;font:.8rem/1.6 ui-monospace,Menlo,Consolas,monospace}
+.detail-foot{flex:none;display:flex;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid var(--line)}
+.nav-btn{padding:7px 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel-2);
+  color:var(--text);font-weight:600;font-size:.86rem;transition:border-color .2s,color .2s}
+.nav-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.nav-btn:disabled{opacity:.35;cursor:default}
+
+/* ───────── Pantallas angostas: se apila y se desplaza normal ───────── */
+@media (min-width:901px){
+  body{height:100vh;overflow:hidden}
+}
+@media (max-width:900px){
+  .view-solve,.view-how{grid-template-columns:1fr}
+  .win-body.scroll{overflow:visible}
+  .detail-grid{grid-template-columns:1fr}
+  .how-theory,.how-code{overflow:visible}
+  .nav{gap:10px;padding:0 12px}
+  .brand span:last-child{display:none}
+  .tabs{margin-left:auto}
+  .tabs a{padding:6px 11px}
+}
